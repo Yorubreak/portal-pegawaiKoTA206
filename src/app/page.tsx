@@ -128,7 +128,7 @@ export default function Home() {
             <div className="arch-card">
               <div className="arch-card-title">File Gambar</div>
               <div className="arch-card-val">Object Storage</div>
-              <span className="chip chip-sky">AWS S3</span>
+              <span className="chip chip-sky">AWS S3 & ECR</span>
             </div>
           </div>
 
