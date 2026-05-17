@@ -30,3 +30,6 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
         IMAGE_TAG: ${{ github.sha }}
       run: docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . && docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    - name: Deploy to Amazon ECS (Force New Deployment)
+      run: aws ecs update-service --cluster cluster-portal-pegawaikota206 --service service-portal-pegawaikota206 --force-new-deployment --region ap-southeast-3
