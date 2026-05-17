@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Izinkan gambar dari domain object storage
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
