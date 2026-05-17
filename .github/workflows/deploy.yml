@@ -30,6 +30,5 @@ jobs:
         ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
         IMAGE_TAG: ${{ github.sha }}
       run: |
-        # Robot membuat docker image berdasarkan Dockerfile yang kita buat tadi
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
