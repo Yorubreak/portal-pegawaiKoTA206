@@ -1,0 +1,35 @@
+name: CI/CD Pipeline to AWS
+
+on:
+  push:
+    branches: [ "main" ] # Robot akan jalan setiap ada push ke branch main
+
+jobs:
+  deploy:
+    name: Build and Push to ECR
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4 # Mengambil salinan kode dari GitHub
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4 # Alat resmi hasil studi literatur Marketplace
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2 # Alat resmi login container registry AWS
+      
+    - name: Build and Push Image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        # Robot membuat docker image berdasarkan Dockerfile yang kita buat tadi
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
