@@ -122,6 +122,16 @@ h1 {
   letter-spacing: -.02em;
 }
 
+h2 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(30px, 5.5vw, 32px);
+  font-weight: 900;
+  color: var(--blue-700);
+  line-height: 1.1;
+  margin-bottom: 12px;
+  letter-spacing: -.02em;
+}
+
 h1 em {
   font-style: italic;
   color: var(--blue-500);

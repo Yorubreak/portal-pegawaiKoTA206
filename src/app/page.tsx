@@ -96,6 +96,7 @@ export default function Home() {
         <p className="subtitle">
           Data teks tersimpan aman di PostgreSQL · Dokumen dikirim ke Object Storage
         </p>
+        <h2>Versi CI/CD</h2>
       </header>
 
       {/* ── Tabs ── */}
